@@ -38,7 +38,7 @@ public:
         return ret;
     }
 
-    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal(TreeNode* root){
         vector<int> ret;
         TreeNode *current = root;
         stack<TreeNode*> nodeStack;
