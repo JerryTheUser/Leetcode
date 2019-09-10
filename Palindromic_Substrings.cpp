@@ -38,7 +38,6 @@ public:
         }
         return ret;
     }
-    
 };
 
 int main()
