@@ -10,30 +10,30 @@ struct TreeNode {
  	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  };
 
-
 class Solution {
 public:
     TreeNode* bstToGst(TreeNode* root) {
         if(root == nullptr)
         	return nullptr;
-        TreeNode *ret = root, *run = root, *tmp;
+        TreeNode *ret = root, *tmp = root;
         int accumulator = 0;
         stack<TreeNode*> stk;
-        stk.push(root);
-
+        while(tmp != nullptr){
+            stk.push(tmp);
+            tmp = tmp->right;
+        }
         while(!stk.empty()){
         	tmp = stk.top();
-        	stk.pop();
-        	while(tmp != nullptr){
-        		stk.push(tmp);
-        		tmp = tmp->right;
-        	}
-        	tmp = stk.top();
-        	stk.pop();
-        	accumulator += tmp->val;
-        	tmp->val = accumulator;
-        	if(tmp->left != nullptr)
-        		stk.push(tmp->left);
+            stk.pop();
+            accumulator += tmp->val;
+            tmp->val = accumulator;
+            if(tmp->left != nullptr){
+                tmp = tmp->left;
+                while(tmp != nullptr){
+                    stk.push(tmp);
+                    tmp = tmp->right;
+                }
+            }
         }
     	return ret;
     }
